@@ -1,0 +1,657 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+@plugin '@tailwindcss/typography';
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    line-height: 1;
+    user-select: none;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Keep legacy public wrappers aligned with the shared navbar/footer container. */
+.max-w-\[1200px\] {
+    max-width: 80rem;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* ── Fonts ─────────────────────────────────── */
+    --font-body:    'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-mono:    'Geist', ui-monospace, 'Cascadia Code', monospace;
+
+    /* ── NasLabs Design System — MD3 Color Tokens ─ */
+    /* Surface */
+    --color-surface:                    #faf8ff;
+    --color-surface-dim:                #d2d9f4;
+    --color-surface-bright:             #faf8ff;
+    --color-surface-container-lowest:   #ffffff;
+    --color-surface-container-low:      #f2f3ff;
+    --color-surface-container:          #eaedff;
+    --color-surface-container-high:     #e2e7ff;
+    --color-surface-container-highest:  #dae2fd;
+    --color-surface-variant:            #dae2fd;
+    --color-surface-tint:               #354ddd;
+    --color-inverse-surface:            #283044;
+    --color-inverse-on-surface:         #eef0ff;
+
+    /* On-Surface */
+    --color-on-surface:                 #131b2e;
+    --color-on-surface-variant:         #444655;
+
+    /* Background */
+    --color-background:                 #faf8ff;
+    --color-on-background:              #131b2e;
+
+    /* Primary */
+    --color-primary:                    #1a35ca;
+    --color-on-primary:                 #ffffff;
+    --color-primary-container:          #3b52e2;
+    --color-on-primary-container:       #dbdeff;
+    --color-inverse-primary:            #bbc3ff;
+    --color-primary-fixed:              #dfe0ff;
+    --color-primary-fixed-dim:          #bbc3ff;
+    --color-on-primary-fixed:           #000d5f;
+    --color-on-primary-fixed-variant:   #122fc6;
+
+    /* Secondary */
+    --color-secondary:                  #545f73;
+    --color-on-secondary:               #ffffff;
+    --color-secondary-container:        #d5e0f8;
+    --color-on-secondary-container:     #586377;
+    --color-secondary-fixed:            #d8e3fb;
+    --color-secondary-fixed-dim:        #bcc7de;
+    --color-on-secondary-fixed:         #111c2d;
+    --color-on-secondary-fixed-variant: #3c475a;
+
+    /* Tertiary */
+    --color-tertiary:                   #3c4c62;
+    --color-on-tertiary:                #ffffff;
+    --color-tertiary-container:         #54647a;
+    --color-on-tertiary-container:      #d0e1fb;
+    --color-tertiary-fixed:             #d3e4fe;
+    --color-tertiary-fixed-dim:         #b7c8e1;
+    --color-on-tertiary-fixed:          #0b1c30;
+    --color-on-tertiary-fixed-variant:  #38485d;
+
+    /* Error */
+    --color-error:                      #ba1a1a;
+    --color-on-error:                   #ffffff;
+    --color-error-container:            #ffdad6;
+    --color-on-error-container:         #93000a;
+
+    /* Outline */
+    --color-outline:                    #757686;
+    --color-outline-variant:            #c5c5d7;
+}
+
+/* ══════════════════════════════════════════════════════
+   DARK MODE — CSS Custom Property Overrides
+   When .dark is on <html>, ALL semantic color tokens swap.
+   This makes bg-surface-container-lowest, text-on-surface,
+   etc. automatically correct in both themes.
+   ══════════════════════════════════════════════════════ */
+.dark {
+    /* Surface */
+    --color-surface:                    #0c1221;
+    --color-surface-dim:                #080d18;
+    --color-surface-bright:             #1a2238;
+    --color-surface-container-lowest:   #111827;
+    --color-surface-container-low:      #161f31;
+    --color-surface-container:          #1c2640;
+    --color-surface-container-high:     #22304e;
+    --color-surface-container-highest:  #283a5c;
+    --color-surface-variant:            #1e2b42;
+    --color-inverse-surface:            #dae2fd;
+    --color-inverse-on-surface:         #283044;
+
+    /* On-Surface */
+    --color-on-surface:                 #e6eaff;
+    --color-on-surface-variant:         #9da4bf;
+
+    /* Background */
+    --color-background:                 #0c1221;
+    --color-on-background:              #e6eaff;
+
+    /* Primary — lighter in dark for contrast */
+    --color-primary:                    #bbc3ff;
+    --color-on-primary:                 #000d5f;
+    --color-primary-container:          #1a35ca;
+    --color-on-primary-container:       #dfe0ff;
+    --color-primary-fixed:              #dfe0ff;
+    --color-primary-fixed-dim:          #bbc3ff;
+
+    /* Secondary */
+    --color-secondary:                  #bcc7de;
+    --color-on-secondary:               #263041;
+    --color-secondary-container:        #3c475a;
+    --color-on-secondary-container:     #d8e3fb;
+
+    /* Tertiary */
+    --color-tertiary:                   #b7c8e1;
+    --color-on-tertiary:                #1e3047;
+    --color-tertiary-container:         #38485d;
+    --color-on-tertiary-container:      #d3e4fe;
+
+    /* Error */
+    --color-error:                      #ffb4ab;
+    --color-on-error:                   #690005;
+    --color-error-container:            #93000a;
+    --color-on-error-container:         #ffdad6;
+
+    /* Outline */
+    --color-outline:                    #5a5f7a;
+    --color-outline-variant:            #2a3050;
+}
+
+/* Ensure body bg also follows the token */
+body { background-color: var(--color-background); }
+
+/* Public pages must never create horizontal scrolling on compact devices. */
+@media (max-width: 639px) {
+    html, body { max-width: 100%; overflow-x: hidden; }
+}
+
+/* ── Scrollbar — hidden by default ──────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-outline); }
+
+/* Dashboard tables use a calmer, more legible rhythm than Flux's compact default. */
+.dashboard-workspace [data-flux-table] [data-flux-column] {
+    padding: 1rem 1.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.dashboard-workspace [data-flux-table] [data-flux-cell] {
+    padding: 1.125rem 1.25rem;
+}
+
+.dashboard-workspace [data-flux-table] [data-flux-row] {
+    transition: background-color 150ms ease;
+}
+
+.dashboard-workspace [data-flux-table] tbody [data-flux-row]:hover {
+    background-color: rgb(244 244 245);
+}
+
+.dark .dashboard-workspace [data-flux-table] tbody [data-flux-row]:hover {
+    background-color: rgb(39 39 42);
+}
+
+/* The sidebar is a bounded work panel, while pages retain their own editorial headers. */
+.dashboard-sidebar [data-flux-sidebar-item][data-current] {
+    background-color: rgb(238 242 255);
+    border-color: rgb(199 210 254);
+    color: rgb(55 48 163);
+}
+
+.dashboard-sidebar [data-flux-sidebar-item][data-current] svg {
+    color: rgb(67 56 202);
+}
+
+.dark .dashboard-sidebar [data-flux-sidebar-item][data-current] {
+    background-color: rgb(30 41 89);
+    border-color: rgb(49 46 129);
+    color: rgb(224 231 255);
+}
+
+.dark .dashboard-sidebar [data-flux-sidebar-item][data-current] svg {
+    color: rgb(165 180 252);
+}
+
+.dashboard-sidebar [data-flux-sidebar-item].dashboard-sidebar-primary {
+    background-color: rgb(24 24 27);
+    border-color: rgb(24 24 27);
+    color: white;
+}
+
+.dashboard-sidebar [data-flux-sidebar-item].dashboard-sidebar-primary:hover {
+    background-color: rgb(63 63 70);
+    border-color: rgb(63 63 70);
+    color: white;
+}
+
+.dashboard-sidebar [data-flux-sidebar-item].dashboard-sidebar-primary svg {
+    color: currentColor;
+}
+
+.dark .dashboard-sidebar [data-flux-sidebar-item].dashboard-sidebar-primary {
+    background-color: rgb(244 244 245);
+    border-color: rgb(244 244 245);
+    color: rgb(24 24 27);
+}
+
+.dark .dashboard-sidebar [data-flux-sidebar-item].dashboard-sidebar-primary:hover {
+    background-color: rgb(212 212 216);
+    border-color: rgb(212 212 216);
+    color: rgb(24 24 27);
+}
+
+.settings-nav-item.settings-nav-item-active {
+    background-color: rgb(238 242 255);
+    color: rgb(55 48 163);
+}
+
+.settings-nav-item.settings-nav-item-active:hover {
+    background-color: rgb(224 231 255);
+}
+
+.dark .settings-nav-item.settings-nav-item-active {
+    background-color: rgb(30 41 89);
+    color: rgb(224 231 255);
+}
+
+.dark .settings-nav-item.settings-nav-item-active:hover {
+    background-color: rgb(49 46 129);
+}
+
+/* Flux persists the desktop sidebar state. These rules make that state an
+   intentional 72px navigation rail instead of relying on clipped overflow. */
+.dashboard-sidebar-section {
+    padding: 0.5rem 0.625rem 0.375rem;
+    color: rgb(113 113 122);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.dashboard-sidebar-toggle {
+    display: grid;
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid rgb(228 228 231);
+    border-radius: 0.5rem;
+    color: rgb(82 82 91);
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.dashboard-sidebar-toggle:hover {
+    border-color: rgb(212 212 216);
+    background-color: rgb(244 244 245);
+    color: rgb(24 24 27);
+}
+
+.dashboard-sidebar-toggle-expand {
+    display: none;
+}
+
+.dark .dashboard-sidebar-toggle {
+    border-color: rgb(63 63 70);
+    color: rgb(161 161 170);
+}
+
+.dark .dashboard-sidebar-toggle:hover {
+    border-color: rgb(82 82 91);
+    background-color: rgb(39 39 42);
+    color: rgb(244 244 245);
+}
+
+@media (min-width: 1024px) {
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] {
+        width: 4.5rem !important;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-expanded {
+        display: none !important;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-header {
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        min-height: 6rem;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-brand {
+        justify-content: center;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-toggle-collapse {
+        display: none;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-toggle-expand {
+        display: block;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] [data-flux-sidebar-nav] {
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] [data-flux-sidebar-item] {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-block: 0;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] [data-flux-sidebar-item] svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-toggle {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-footer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.375rem;
+        border-top-width: 0;
+        padding-top: 1rem;
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-footer::before {
+        position: absolute;
+        top: 0;
+        width: 2.5rem;
+        height: 1px;
+        background-color: rgb(228 228 231);
+        content: '';
+    }
+
+    .dark .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-footer::before {
+        background-color: rgb(63 63 70);
+    }
+
+    .dashboard-sidebar[data-flux-sidebar-collapsed-desktop] .dashboard-sidebar-footer [data-flux-sidebar-item] {
+        margin-inline: auto;
+    }
+
+}
+
+/* Public blog theme: normalize the existing visual language without touching
+   its layout. The page uses legacy arbitrary Tailwind colors, so these
+   mappings make all those surfaces resolve to one calm light/dark palette. */
+:root:not(.dark) {
+    --public-canvas: #f8fafc;
+    --public-surface: #ffffff;
+    --public-surface-muted: #f1f4f9;
+    --public-surface-tint: #e8eefb;
+    --public-text: #172033;
+    --public-muted: #5d687b;
+    --public-border: #dbe2ec;
+    --public-primary: #3155c6;
+    --public-primary-hover: #2949aa;
+    --public-nav-surface: #ffffff;
+    --public-nav-hover: #f1f4f9;
+    --public-nav-active: #e8eefb;
+}
+
+:root:not(.dark) .bg-\[\#faf8ff\],
+:root:not(.dark) .bg-\[\#f2f3ff\] { background-color: var(--public-canvas); }
+:root:not(.dark) .bg-\[\#eef0ff\],
+:root:not(.dark) .bg-\[\#eaedff\] { background-color: var(--public-surface-muted); }
+:root:not(.dark) .bg-\[\#dae2fd\],
+:root:not(.dark) .bg-\[\#dfe0ff\] { background-color: var(--public-surface-tint); }
+:root:not(.dark) .text-\[\#131b2e\] { color: var(--public-text); }
+:root:not(.dark) .text-\[\#444655\],
+:root:not(.dark) .text-\[\#757686\] { color: var(--public-muted); }
+:root:not(.dark) .text-\[\#1a35ca\] { color: var(--public-primary); }
+:root:not(.dark) .bg-\[\#1a35ca\] { background-color: var(--public-primary); }
+:root:not(.dark) .hover\:bg-\[\#3b52e2\]:hover { background-color: var(--public-primary-hover); }
+:root:not(.dark) .border-\[\#c5c5d7\],
+:root:not(.dark) .border-\[\#c5c5d7\]\/20,
+:root:not(.dark) .border-\[\#c5c5d7\]\/30,
+:root:not(.dark) .border-\[\#c5c5d7\]\/40,
+:root:not(.dark) .border-\[\#c5c5d7\]\/50 { border-color: var(--public-border); }
+
+.dark {
+    --public-canvas: #0f1420;
+    --public-surface: #171e2d;
+    --public-surface-muted: #1b2436;
+    --public-surface-tint: #222d43;
+    --public-text: #e8edf7;
+    --public-muted: #aab4c7;
+    --public-border: #344056;
+    --public-primary: #91a8ff;
+    --public-primary-strong: #4f6fe0;
+    --public-nav-surface: #101426;
+    --public-nav-hover: #1b2436;
+    --public-nav-active: #222d43;
+}
+
+/* Public navigation uses the existing blog palette, with a solid surface and
+   restrained indigo states rather than a translucent application chrome. */
+.public-navbar {
+    border-bottom: 1px solid var(--public-border);
+    background-color: var(--public-nav-surface);
+}
+
+.public-navbar-link {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding-inline: 0.75rem;
+    color: var(--public-muted);
+    font-weight: 500;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.public-navbar-link:hover {
+    background-color: var(--public-nav-hover);
+    color: var(--public-text);
+}
+
+.public-navbar-link:focus-visible,
+.public-navbar-control:focus-visible,
+.public-navbar-locale-link:focus-visible,
+.public-navbar-mobile-link:focus-visible {
+    outline: 2px solid var(--public-primary);
+    outline-offset: 2px;
+}
+
+.public-navbar-link-active {
+    background-color: var(--public-nav-active);
+    color: var(--public-primary);
+    font-weight: 600;
+}
+
+.public-navbar-control {
+    display: inline-flex;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--public-border);
+    border-radius: 0.5rem;
+    color: var(--public-muted);
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.public-navbar-control:hover {
+    border-color: color-mix(in srgb, var(--public-border), var(--public-primary) 25%);
+    background-color: var(--public-nav-hover);
+    color: var(--public-text);
+}
+
+.public-navbar-icon-control {
+    width: 2.5rem;
+}
+
+.public-navbar-search {
+    padding-inline: 0.625rem;
+}
+
+.public-navbar-locale {
+    overflow: hidden;
+    height: 2.5rem;
+    border: 1px solid var(--public-border);
+    border-radius: 0.5rem;
+}
+
+.public-navbar-locale-link {
+    display: inline-flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.625rem;
+    color: var(--public-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.public-navbar-locale-link:hover {
+    background-color: var(--public-nav-hover);
+    color: var(--public-text);
+}
+
+.public-navbar-locale-link-active {
+    background-color: var(--public-nav-active);
+    color: var(--public-primary);
+}
+
+.public-navbar-mobile-menu > summary::-webkit-details-marker {
+    display: none;
+}
+
+.public-navbar-mobile-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    width: 14rem;
+    border: 1px solid var(--public-border);
+    border-radius: 0.5rem;
+    background-color: var(--public-nav-surface);
+    padding: 0.5rem;
+    box-shadow: 0 8px 20px rgb(15 23 42 / 0.1);
+}
+
+.public-navbar-mobile-link {
+    display: flex;
+    min-height: 2.5rem;
+    align-items: center;
+    border-radius: 0.375rem;
+    padding-inline: 0.625rem;
+    color: var(--public-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.public-navbar-mobile-link:hover {
+    background-color: var(--public-nav-hover);
+}
+
+.public-footer {
+    border-top: 1px solid var(--public-border);
+    background-color: var(--public-nav-surface);
+}
+
+.public-footer > div > div:first-child {
+    border-color: var(--public-border);
+}
+
+.public-footer-brand {
+    color: var(--public-text);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+}
+
+.public-footer-brand span {
+    color: var(--public-muted);
+    font-weight: 500;
+}
+
+.public-footer-brand strong {
+    font-weight: 650;
+}
+
+.public-footer-copy {
+    color: var(--public-muted);
+    font-size: 0.875rem;
+    line-height: 1.65;
+}
+
+.public-footer-link {
+    color: var(--public-muted);
+    font-weight: 500;
+    transition: color 150ms ease;
+}
+
+.public-footer-link:hover {
+    color: var(--public-primary);
+}
+
+.public-footer-link:focus-visible,
+.public-footer-cta:focus-visible {
+    outline: 2px solid var(--public-primary);
+    outline-offset: 3px;
+}
+
+.public-footer-cta {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    background-color: var(--public-primary);
+    margin-top: 1.25rem;
+    padding-inline: 0.875rem;
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: background-color 150ms ease;
+}
+
+.public-footer-cta:hover {
+    background-color: var(--public-primary-hover);
+}
+
+.dark .public-footer-cta {
+    background-color: var(--public-primary-strong);
+}
+
+.dark .public-footer-cta:hover {
+    background-color: var(--public-primary);
+}
+
+.public-footer-meta {
+    color: var(--public-muted);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+}
+
+.dark .dark\:bg-\[\#101426\],
+.dark .dark\:bg-\[\#171d34\] { background-color: var(--public-surface); }
+.dark .dark\:bg-\[\#202947\] { background-color: var(--public-surface-muted); }
+.dark .dark\:text-\[\#eef0ff\] { color: var(--public-text); }
+.dark .dark\:text-\[\#c5c5d7\] { color: var(--public-muted); }
+.dark .bg-\[\#faf8ff\],
+.dark .bg-\[\#f2f3ff\] { background-color: var(--public-canvas); }
+.dark .bg-\[\#eef0ff\],
+.dark .bg-\[\#eaedff\] { background-color: var(--public-surface-muted); }
+.dark .bg-\[\#dae2fd\],
+.dark .bg-\[\#dfe0ff\] { background-color: var(--public-surface-tint); }
+.dark .text-\[\#131b2e\] { color: var(--public-text); }
+.dark .text-\[\#444655\],
+.dark .text-\[\#757686\] { color: var(--public-muted); }
+.dark .text-\[\#1a35ca\] { color: var(--public-primary); }
+.dark .bg-\[\#1a35ca\] { background-color: var(--public-primary-strong); }
+.dark .hover\:bg-\[\#3b52e2\]:hover { background-color: #6683eb; }
+.dark .border-\[\#c5c5d7\],
+.dark .border-\[\#c5c5d7\]\/20,
+.dark .border-\[\#c5c5d7\]\/30,
+.dark .border-\[\#c5c5d7\]\/40,
+.dark .border-\[\#c5c5d7\]\/50 { border-color: var(--public-border); }
